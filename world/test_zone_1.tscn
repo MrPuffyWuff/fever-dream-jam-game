@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://by144car7p2n"]
+
+[ext_resource type="PackedScene" uid="uid://bd2priai8xdty" path="res://world/test_zone_1_level.tscn" id="1_12jo4"]
+[ext_resource type="PackedScene" uid="uid://08a8nayclw1f" path="res://world/decoration/test_plant.tscn" id="2_4km2d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4km2d"]
+sky_top_color = Color(0.19459635, 0.46403688, 0.7096536, 1)
+
+[sub_resource type="Sky" id="Sky_lo6fv"]
+sky_material = SubResource("ProceduralSkyMaterial_4km2d")
+
+[sub_resource type="Environment" id="Environment_pmnuh"]
+background_mode = 2
+sky = SubResource("Sky_lo6fv")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_12jo4"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4km2d"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = SubResource("ViewportTexture_12jo4")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tpqp5"]
+resource_local_to_scene = true
+size = Vector2(32, 32)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_12jo4"]
+data = PackedVector3Array(256, 0, 256, -256, 0, 256, 256, 0, -256, -256, 0, 256, -256, 0, -256, 256, 0, -256)
+
+[node name="TestZone1" type="Node3D" unique_id=607640060]
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1695800758]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="TestZone1Level" parent="SubViewport" unique_id=1280378095 instance=ExtResource("1_12jo4")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=985780669]
+environment = SubResource("Environment_pmnuh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1638681330]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 104.564316, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1908243172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010516167, 0, -0.0016655922)
+material_override = SubResource("StandardMaterial3D_4km2d")
+mesh = SubResource("PlaneMesh_tpqp5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=2074603586]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=1959100432]
+shape = SubResource("ConcavePolygonShape3D_12jo4")
+
+[node name="Decor" type="Node3D" parent="." unique_id=499357571]
+
+[node name="TestPlant" parent="Decor" unique_id=1117925512 instance=ExtResource("2_4km2d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5509095, 0, 0)

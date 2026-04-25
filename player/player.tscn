@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://nibbqupral63"]
+
+[ext_resource type="Texture2D" uid="uid://re36atxgv4tg" path="res://icon.svg" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://ba52mc64jrwsm" path="res://player/player.gd" id="1_rkbax"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkbax"]
+albedo_texture = ExtResource("1_oul6g")
+texture_filter = 0
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_rkbax"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yw30f"]
+height = 1.0
+
+[node name="Player" type="CharacterBody3D" unique_id=1432535360]
+script = ExtResource("1_rkbax")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1657628690]
+material_override = SubResource("StandardMaterial3D_rkbax")
+mesh = SubResource("QuadMesh_rkbax")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=555494848]
+shape = SubResource("CapsuleShape3D_yw30f")

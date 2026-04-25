@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://1s07uuop614"]
+
+[ext_resource type="Script" uid="uid://cmglpi2eoymo1" path="res://menus_ui/debug_ui.gd" id="1_p7kau"]
+
+[node name="DebugUi" type="Control" unique_id=1143121874]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p7kau")
+
+[node name="Content" type="Label" parent="." unique_id=1180972680]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 8.0
+offset_right = 625.0
+offset_bottom = 1079.0
+theme_override_font_sizes/font_size = 32
+text = "TEST
+TEST
+TESDIOJDSOKDSOIKDSOKS"

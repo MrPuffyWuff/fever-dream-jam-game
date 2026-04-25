@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dhhuit24ixxj0"]
+
+[ext_resource type="PackedScene" uid="uid://1s07uuop614" path="res://menus_ui/debug_ui.tscn" id="1_b7hlb"]
+[ext_resource type="PackedScene" uid="uid://by144car7p2n" path="res://world/test_zone_1.tscn" id="1_xfo4j"]
+[ext_resource type="PackedScene" uid="uid://nibbqupral63" path="res://player/player.tscn" id="2_b7hlb"]
+
+[node name="Game" type="Node3D" unique_id=1373915210]
+
+[node name="DebugUi" parent="." unique_id=1143121874 instance=ExtResource("1_b7hlb")]
+
+[node name="TestZone1" parent="." unique_id=607640060 instance=ExtResource("1_xfo4j")]
+
+[node name="Player" parent="." unique_id=1432535360 instance=ExtResource("2_b7hlb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=992582868]
+transform = Transform3D(1, 0, 0, 0, 0.7488169, 0.6627769, 0, -0.6627769, 0.7488169, 0, 3.023138, 3.9675965)
