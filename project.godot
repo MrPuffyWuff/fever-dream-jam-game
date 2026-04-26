@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 DialogueManager="*uid://c3rodes2l3gxb"
 SceneSwitcher="*uid://1jbcnu4yuyd6"
 Signals="*uid://ckx0wudawns5y"
+GameState="*uid://du6k4ccm5xrrc"
 
 [display]
 
