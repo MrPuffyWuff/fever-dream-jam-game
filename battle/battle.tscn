@@ -1,29 +1,53 @@
 [gd_scene format=3 uid="uid://ct6bp0rkuvq1x"]
 
-[ext_resource type="Texture2D" uid="uid://hpm77thrgume" path="res://assets/tile.png" id="1_mqutd"]
 [ext_resource type="Script" uid="uid://b0h84ar715nok" path="res://battle/battle.gd" id="1_tiqy5"]
+[ext_resource type="PackedScene" uid="uid://btbu5sudhwx8o" path="res://battle/battle_level_1.tscn" id="2_tiqy5"]
 
 [sub_resource type="Environment" id="Environment_mqutd"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tiqy5"]
-albedo_texture = ExtResource("1_mqutd")
-uv1_scale = Vector3(10, 10, 10)
+[sub_resource type="ViewportTexture" id="ViewportTexture_tiqy5"]
+viewport_path = NodePath("Level")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ly7b7"]
-size = Vector2(10, 10)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qubjc"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_tiqy5")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tiqy5"]
+size = Vector2(30, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tiqy5"]
+size = Vector3(100, 0, 100)
 
 [node name="Battle" type="Node3D" unique_id=135319441]
 script = ExtResource("1_tiqy5")
 
+[node name="Level" type="SubViewport" parent="." unique_id=425982709]
+size = Vector2i(480, 480)
+
+[node name="BattleLevel1" parent="Level" unique_id=1355380289 instance=ExtResource("2_tiqy5")]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1008716282]
 environment = SubResource("Environment_mqutd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=575989529]
-material_override = SubResource("StandardMaterial3D_tiqy5")
-mesh = SubResource("PlaneMesh_ly7b7")
+[node name="Ground" type="Node" parent="." unique_id=1064143043]
+
+[node name="Floor" type="MeshInstance3D" parent="Ground" unique_id=575989529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 15)
+material_override = SubResource("StandardMaterial3D_qubjc")
+mesh = SubResource("PlaneMesh_tiqy5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Floor" unique_id=853621051]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Floor/StaticBody3D" unique_id=843521217]
+shape = SubResource("BoxShape3D_tiqy5")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=390648690]
-transform = Transform3D(0.70710677, -0.49999997, 0.49999997, 0, 0.70710677, 0.70710677, -0.70710677, -0.49999997, 0.49999997, 7, 7, 7)
+transform = Transform3D(-0.7071067, 0.49999994, -0.49999994, 0, 0.7071067, 0.7071067, 0.7071067, 0.49999994, -0.49999994, -8, 17.5, -8)
+projection = 1
+size = 20.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=696628383]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 20.656075, 0)
+
+[node name="Units" type="Node" parent="." unique_id=1143265872]

@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bawmjshgd75us"]
+
+[ext_resource type="Texture2D" uid="uid://dfbfd1h3ndexr" path="res://assets/placeholder_assets/programmer_art-terrain.png" id="1_72exn"]
+[ext_resource type="Script" uid="uid://dwjarkmy166uy" path="res://battle/units/unit_mc_test.gd" id="1_nvyei"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8o4k"]
+atlas = ExtResource("1_72exn")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tup70"]
+atlas = ExtResource("1_72exn")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3korh"]
+atlas = ExtResource("1_72exn")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_te5n4"]
+atlas = ExtResource("1_72exn")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dxd4n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8o4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tup70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3korh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_te5n4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_72exn"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s6ep4"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_72exn")
+texture_filter = 0
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_72exn"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_72exn"]
+
+[node name="UnitMcTest" type="CharacterBody3D" unique_id=1925207477]
+script = ExtResource("1_nvyei")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=454329380]
+size = Vector2i(16, 16)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SubViewport" unique_id=399635391]
+position = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_dxd4n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1777538035]
+material_override = SubResource("StandardMaterial3D_s6ep4")
+mesh = SubResource("QuadMesh_72exn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=915873250]
+shape = SubResource("SphereShape3D_72exn")

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chepmtd7x0arx"
-path.s3tc="res://.godot/imported/programmer_art-objects.png-55cf57d31c88fd375c3a4908b68d5153.s3tc.ctex"
+uid="uid://dfbfd1h3ndexr"
+path.s3tc="res://.godot/imported/programmer_art-terrain.png-6c4acb9757493c5782f44f4580af4e3c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/programmer_art-objects.png"
-dest_files=["res://.godot/imported/programmer_art-objects.png-55cf57d31c88fd375c3a4908b68d5153.s3tc.ctex"]
+source_file="res://assets/placeholder_assets/programmer_art-terrain.png"
+dest_files=["res://.godot/imported/programmer_art-terrain.png-6c4acb9757493c5782f44f4580af4e3c.s3tc.ctex"]
 
 [params]
 

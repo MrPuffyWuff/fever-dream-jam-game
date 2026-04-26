@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://ct6bp0rkuvq1x"]
+
+[ext_resource type="Script" uid="uid://b0h84ar715nok" path="res://battle/battle.gd" id="1_tiqy5"]
+
+[sub_resource type="Environment" id="Environment_mqutd"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qubjc"]
+viewport_path = NodePath("Level")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tiqy5"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_qubjc")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ly7b7"]
+size = Vector2(30, 30)
+
+[node name="Battle" type="Node3D" unique_id=135319441]
+script = ExtResource("1_tiqy5")
+
+[node name="Level" type="SubViewport" parent="." unique_id=425982709]
+size = Vector2i(480, 480)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1008716282]
+environment = SubResource("Environment_mqutd")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=575989529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 15)
+material_override = SubResource("StandardMaterial3D_tiqy5")
+mesh = SubResource("PlaneMesh_ly7b7")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=390648690]
+transform = Transform3D(-0.7071067, 0.49999994, -0.49999994, 0, 0.7071067, 0.7071067, 0.7071067, 0.49999994, -0.49999994, -8, 25, -8)
+projection = 1
+size = 30.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=696628383]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 20.656075, 0)

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bd2priai8xdty" path="res://world/test_zone_1_level.tscn" id="1_12jo4"]
 [ext_resource type="PackedScene" uid="uid://08a8nayclw1f" path="res://world/decoration/test_plant.tscn" id="2_4km2d"]
-[ext_resource type="Texture2D" uid="uid://bclnfs3wpv1ea" path="res://assets/temp_sky.png" id="2_lo6fv"]
+[ext_resource type="Texture2D" uid="uid://bclnfs3wpv1ea" path="res://assets/placeholder_assets/temp_sky.png" id="2_lo6fv"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lo6fv"]
 panorama = ExtResource("2_lo6fv")
