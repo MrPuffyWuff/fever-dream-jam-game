@@ -1,0 +1,7 @@
+~ start
+Angry Boi: Hey, you
+Angry Boi: Yeah,[wait=1] [shake]YOU[/shake]
+Angry Boi: You wanna dance?
+Angry Boi: [b]LETS DANCE[/b]
+do Signals.battle_start.emit()
+=> END

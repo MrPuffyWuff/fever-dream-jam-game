@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ckcm3y8r1qk7e"]
+
+[ext_resource type="Texture2D" uid="uid://re36atxgv4tg" path="res://icon.svg" id="1_ghpvn"]
+[ext_resource type="PackedScene" uid="uid://c70bd3ckv4rgs" path="res://npcs/dialogue_component.tscn" id="2_eymwu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eymwu"]
+albedo_texture = ExtResource("1_ghpvn")
+texture_filter = 0
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_popet"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ghpvn"]
+
+[node name="TestBattleNpc" type="CharacterBody3D" unique_id=1397856221]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=980182475]
+material_override = SubResource("StandardMaterial3D_eymwu")
+mesh = SubResource("QuadMesh_popet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=923744399]
+shape = SubResource("SphereShape3D_ghpvn")
+
+[node name="DialogueComponent" parent="." unique_id=2046461587 instance=ExtResource("2_eymwu")]

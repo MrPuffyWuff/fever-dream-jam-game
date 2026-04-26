@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dtagxrifo0ju4"
+path="res://.godot/imported/test_battle_npc.dialogue-255522edd2dd32cc27ca124ec65100e5.tres"
+
+[deps]
+
+source_file="res://npcs/test_battle_npc/test_battle_npc.dialogue"
+dest_files=["res://.godot/imported/test_battle_npc.dialogue-255522edd2dd32cc27ca124ec65100e5.tres"]
+
+[params]
+
+defaults=true
