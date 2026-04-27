@@ -1,5 +1,12 @@
 extends CharacterBody3D
 
+var movement_vectors : Array[Vector2] = [
+	Vector2(1,0),
+	Vector2(-1,0),
+	Vector2(0,1),
+	Vector2(0,-1),
+]
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():

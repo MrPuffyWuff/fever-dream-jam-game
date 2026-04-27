@@ -1,20 +1,24 @@
 [gd_scene format=3 uid="uid://ct6bp0rkuvq1x"]
 
 [ext_resource type="Script" uid="uid://b0h84ar715nok" path="res://battle/battle.gd" id="1_tiqy5"]
-[ext_resource type="PackedScene" uid="uid://btbu5sudhwx8o" path="res://battle/battle_level_1.tscn" id="2_tiqy5"]
+[ext_resource type="PackedScene" uid="uid://btbu5sudhwx8o" path="res://battle/battle_level_1.tscn" id="2_qubjc"]
+[ext_resource type="Shader" uid="uid://dgyyqxnhjyqrs" path="res://battle/grid.gdshader" id="3_qubjc"]
 
 [sub_resource type="Environment" id="Environment_mqutd"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tiqy5"]
 viewport_path = NodePath("Level")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qubjc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqutd"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_tiqy5")
-texture_filter = 0
+render_priority = 0
+shader = ExtResource("3_qubjc")
+shader_parameter/material = SubResource("ViewportTexture_tiqy5")
+shader_parameter/dimensions = Vector2(30, 30)
+shader_parameter/tiles = PackedVector2Array(-1, -1, 9, 8)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_tiqy5"]
-size = Vector2(30, 30)
+[sub_resource type="ViewportTexture" id="ViewportTexture_qubjc"]
+viewport_path = NodePath("Level")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tiqy5"]
 size = Vector3(100, 0, 100)
@@ -25,21 +29,21 @@ script = ExtResource("1_tiqy5")
 [node name="Level" type="SubViewport" parent="." unique_id=425982709]
 size = Vector2i(480, 480)
 
-[node name="BattleLevel1" parent="Level" unique_id=1355380289 instance=ExtResource("2_tiqy5")]
+[node name="BattleLevel1" parent="Level" unique_id=1355380289 instance=ExtResource("2_qubjc")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1008716282]
 environment = SubResource("Environment_mqutd")
 
-[node name="Ground" type="Node" parent="." unique_id=1064143043]
-
-[node name="Floor" type="MeshInstance3D" parent="Ground" unique_id=575989529]
+[node name="Floor" type="Sprite3D" parent="." unique_id=1829309803]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 15)
-material_override = SubResource("StandardMaterial3D_qubjc")
-mesh = SubResource("PlaneMesh_tiqy5")
+material_override = SubResource("ShaderMaterial_mqutd")
+pixel_size = 0.0625
+axis = 1
+texture = SubResource("ViewportTexture_qubjc")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Floor" unique_id=853621051]
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=853621051]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Floor/StaticBody3D" unique_id=843521217]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=843521217]
 shape = SubResource("BoxShape3D_tiqy5")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=390648690]
