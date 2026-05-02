@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dfbfd1h3ndexr" path="res://assets/placeholder_assets/programmer_art-terrain.png" id="1_72exn"]
 [ext_resource type="Script" uid="uid://dwjarkmy166uy" path="res://battle/units/unit_mc_test.gd" id="1_nvyei"]
+[ext_resource type="PackedScene" uid="uid://dcc2okqd6px7b" path="res://battle/units/components/movement_component.tscn" id="2_i8o4k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i8o4k"]
 atlas = ExtResource("1_72exn")
@@ -54,6 +55,9 @@ billboard_mode = 1
 
 [node name="UnitMcTest" type="CharacterBody3D" unique_id=1925207477]
 script = ExtResource("1_nvyei")
+
+[node name="MovementComponent" parent="." unique_id=521658061 instance=ExtResource("2_i8o4k")]
+speed = 1
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=454329380]
 size = Vector2i(16, 16)

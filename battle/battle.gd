@@ -7,6 +7,10 @@ var vec_to_index : Dictionary[Vector2, int]
 var tile_value : Array = []
 var tile_attribute : Array = []
 
+var prev_selected_idx : int = -1
+var selected_index : int = -1
+
+var is_movement_tiles_shown : bool = false
 const GRID_SHADER = preload("uid://dgyyqxnhjyqrs")
 
 func setup_index_vec_dict():
@@ -61,9 +65,27 @@ func _ready() -> void:
 		tile_value[index] = unit
 		$Units.add_child(unit)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func display_movement_tiles(selected_unit):
+	var movement_vectors : Array[Vector2] = selected_unit.movement_vectors.duplicate()
+	for i in range(len(movement_vectors)):
+		movement_vectors[i] += index_to_vec[selected_index]
+	# NOTE Due to shader shenanigaans, we must fill it with a bunch of Vector(-1,-1)
+	var arr_fill : Array[Vector2]
+	arr_fill.resize(100)
+	arr_fill.fill(Vector2(-1,-1))
+	movement_vectors += arr_fill
+	$Floor.material_override.set_shader_parameter("tiles", movement_vectors)
+	
+	is_movement_tiles_shown = true
+
+func hide_movement_tiles():
+	# NOTE Due to shader shenanigaans, we must fill it with a bunch of Vector(-1,-1)
+	var arr_fill : Array[Vector2]
+	arr_fill.resize(100)
+	arr_fill.fill(Vector2(-1,-1))
+	$Floor.material_override.set_shader_parameter("tiles", arr_fill)
+	
+	is_movement_tiles_shown = false
 
 func _physics_process(delta : float):
 	if Input.is_action_just_pressed("select_tile"):
@@ -71,18 +93,30 @@ func _physics_process(delta : float):
 		var tile_vec = Vector2(floor(result.position.x), floor(result.position.z))
 		if tile_vec not in vec_to_index: return
 		var tile_idx = vec_to_index[tile_vec]
-		var selected_unit = tile_value[tile_idx]
-		
-		if selected_unit == null: return
-		var movement_vectors : Array[Vector2] = selected_unit.movement_vectors.duplicate()
-		for i in range(len(movement_vectors)):
-			movement_vectors[i] += tile_vec
-		# NOTE Due to shader shenanigaans, we must fill it with a bunch of Vector(-1,-1)
-		var arr_fill : Array[Vector2]
-		arr_fill.resize(100)
-		arr_fill.fill(Vector2(-1,-1))
-		movement_vectors += arr_fill
-		$Floor.material_override.set_shader_parameter("tiles", movement_vectors)
+		prev_selected_idx = selected_index
+		selected_index = tile_idx
+	
+	if selected_index != -1:
+		if tile_value[selected_index] != null:# If unit selected, show movement vector
+			display_movement_tiles(tile_value[selected_index])
+		elif is_movement_tiles_shown:# If clicked on a space, and we can see movement tiles, maaaybe they wanan move the guy?
+			var selected_vec = index_to_vec[selected_index]
+			var last_selected_unit : CharacterBody3D = tile_value[prev_selected_idx]
+			if (selected_vec - index_to_vec[prev_selected_idx]) in last_selected_unit.movement_vectors:
+				var movement_comp : MovementComponent = last_selected_unit.find_child("MovementComponent")
+				var target_vec := Vector3(
+					selected_vec.x,
+					0,
+					selected_vec.y
+				)
+				movement_comp.go_to_location(target_vec)
+				hide_movement_tiles()
+				tile_value[prev_selected_idx] = null
+				selected_index = -1
+				await movement_comp.target_reached
+				tile_value[selected_index] = last_selected_unit
+		else:
+			hide_movement_tiles()
 
 # WARNING Must be called in physics_process, or kaboom
 '''

@@ -16,6 +16,8 @@ var movement_vectors : Array[Vector2] = [
 ]
 
 func _physics_process(delta: float) -> void:
+	#if velocity != Vector3.ZERO:
+		#print(position, velocity)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
