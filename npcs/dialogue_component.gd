@@ -2,13 +2,14 @@ extends Node3D
 
 @export var dialogue = preload("uid://dtagxrifo0ju4")
 
-@export var interaction_radius : float = 1
+#@export var interaction_radius : float = 1
+@export var interaction_shape: Shape3D
 
 var is_player_inbounds : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Area3D/CollisionShape3D.shape.radius = interaction_radius
+	$Area3D/CollisionShape3D.shape = interaction_shape#.radius = interaction_radius
 	Signals.npc_interaction.connect(on_npc_interact)
 
 

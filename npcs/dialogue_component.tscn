@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://crr0yc8ruyipg" path="res://npcs/dialogue_component.gd" id="1_jurs7"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_jurs7"]
+radius = 1.0
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_mh2h5"]
 
 [node name="DialogueComponent" type="Node3D" unique_id=2046461587]
 script = ExtResource("1_jurs7")
+interaction_shape = SubResource("SphereShape3D_jurs7")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=603490209]
 
