@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://1s07uuop614" path="res://menus_ui/debug_ui.tscn" id="1_b7hlb"]
 [ext_resource type="PackedScene" uid="uid://nibbqupral63" path="res://player/player.tscn" id="2_b7hlb"]
-[ext_resource type="PackedScene" uid="uid://cfl5n2pum6pu" path="res://world/HQ/office.tscn" id="4_6jtoe"]
+[ext_resource type="PackedScene" uid="uid://ds4w0732t31c2" path="res://world/HQ/office.tscn" id="4_6jtoe"]
 [ext_resource type="PackedScene" uid="uid://ckcm3y8r1qk7e" path="res://npcs/test_battle_npc/test_battle_npc.tscn" id="4_7oyu6"]
 
 [node name="Game" type="Node3D" unique_id=1373915210]

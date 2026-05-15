@@ -1,13 +1,11 @@
 extends Area3D
 
-@export var starting_location: String 
+
+## path or uid. I'm using paths since more readable
 @export var to_scene: String # Can't be packed scene due to weird engine bug
-@export var shape: Shape3D
+## position to spawn player anew
+@export var spawn_pos: Vector3 = Vector3(0,0.5,0)
 
-func _ready():
-	if shape:
-		$CollisionShape3D.shape = shape
-
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(body) -> void:
 	if body.name.to_lower() == "player":
-		SceneSwitcher.goto_scene(load(to_scene) as PackedScene, starting_location)
+		SceneSwitcher.switch_scene(load(to_scene) as PackedScene, spawn_pos)

@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://c1lpddw7td1xa"]
+
+[ext_resource type="PackedScene" uid="uid://bpahrghte2c2s" path="res://world/HQ/hallway_level.tscn" id="1_bpl2a"]
+[ext_resource type="Texture2D" uid="uid://bclnfs3wpv1ea" path="res://assets/placeholder_assets/temp_sky.png" id="2_oho5s"]
+[ext_resource type="PackedScene" uid="uid://bqj11bu3o0tbj" path="res://world/scene_switch_area.tscn" id="3_oho5s"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_s462f"]
+panorama = ExtResource("2_oho5s")
+
+[sub_resource type="Sky" id="Sky_lo6fv"]
+sky_material = SubResource("PanoramaSkyMaterial_s462f")
+
+[sub_resource type="Environment" id="Environment_v4xxl"]
+background_mode = 2
+sky = SubResource("Sky_lo6fv")
+sky_rotation = Vector3(0, 3.1415927, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k88jq"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfrik"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = SubResource("ViewportTexture_k88jq")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_766q2"]
+resource_local_to_scene = true
+size = Vector2(10.4, 3.2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_myeec"]
+data = PackedVector3Array(256, 0, 256, -256, 0, 256, 256, 0, -256, -256, 0, 256, -256, 0, -256, 256, 0, -256)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s462f"]
+size = Vector3(1, 1, 3.159729)
+
+[node name="Hallway" type="Node3D" unique_id=289050022]
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=809449334]
+handle_input_locally = false
+size = Vector2i(208, 64)
+render_target_update_mode = 4
+
+[node name="HallwayLevel" parent="SubViewport" unique_id=181442891 instance=ExtResource("1_bpl2a")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=259493381]
+environment = SubResource("Environment_v4xxl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1315621044]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 104.564316, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1914784826]
+material_override = SubResource("StandardMaterial3D_nfrik")
+mesh = SubResource("PlaneMesh_766q2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=842270401]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=67378914]
+shape = SubResource("ConcavePolygonShape3D_myeec")
+
+[node name="Transitions" type="Node3D" parent="." unique_id=430842526]
+
+[node name="SceneSwitchArea" parent="Transitions" unique_id=445465897 instance=ExtResource("3_oho5s")]
+to_scene = "res://world/HQ/office.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Transitions/SceneSwitchArea" unique_id=1960908898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.336914, 0, -0.03286743)
+shape = SubResource("BoxShape3D_s462f")

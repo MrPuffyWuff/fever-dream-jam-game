@@ -1,13 +1,8 @@
-[gd_scene format=3 uid="uid://ba0plrctfewqj"]
+[gd_scene format=3 uid="uid://bqj11bu3o0tbj"]
 
 [ext_resource type="Script" uid="uid://bvs0hxcim7088" path="res://world/scene_switch_area.gd" id="1_opaqc"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_opaqc"]
-
 [node name="SceneSwitchArea" type="Area3D" unique_id=445465897]
 script = ExtResource("1_opaqc")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1872168852]
-shape = SubResource("BoxShape3D_opaqc")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
