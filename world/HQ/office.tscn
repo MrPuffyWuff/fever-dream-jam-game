@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cfl5n2pum6pu"]
+
+[ext_resource type="PackedScene" uid="uid://b18y148nih4jq" path="res://world/HQ/office_level.tscn" id="1_avusk"]
+[ext_resource type="Texture2D" uid="uid://bclnfs3wpv1ea" path="res://assets/placeholder_assets/temp_sky.png" id="2_7gc6s"]
+[ext_resource type="PackedScene" uid="uid://cby1mee4ysndu" path="res://assets/models/desk.blend" id="3_avusk"]
+[ext_resource type="PackedScene" uid="uid://uq1vpm1yx3or" path="res://assets/models/chair.blend" id="4_7gc6s"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wawyi"]
+panorama = ExtResource("2_7gc6s")
+
+[sub_resource type="Sky" id="Sky_lo6fv"]
+sky_material = SubResource("PanoramaSkyMaterial_wawyi")
+
+[sub_resource type="Environment" id="Environment_gf8px"]
+background_mode = 2
+sky = SubResource("Sky_lo6fv")
+sky_rotation = Vector3(0, 3.1415927, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ov6fm"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hyg8x"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = SubResource("ViewportTexture_ov6fm")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_t2gta"]
+resource_local_to_scene = true
+size = Vector2(7.35, 8)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rwwr5"]
+data = PackedVector3Array(256, 0, 256, -256, 0, 256, 256, 0, -256, -256, 0, 256, -256, 0, -256, 256, 0, -256)
+
+[node name="Office" type="Node3D" unique_id=731126487]
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1141918476]
+handle_input_locally = false
+size = Vector2i(144, 160)
+render_target_update_mode = 4
+
+[node name="OfficeLevel" parent="SubViewport" unique_id=698237839 instance=ExtResource("1_avusk")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1397224184]
+environment = SubResource("Environment_gf8px")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1953054658]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 104.564316, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=867745157]
+material_override = SubResource("StandardMaterial3D_hyg8x")
+mesh = SubResource("PlaneMesh_t2gta")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=2110066647]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=983893842]
+shape = SubResource("ConcavePolygonShape3D_rwwr5")
+
+[node name="Decor" type="Node3D" parent="." unique_id=133806780]
+
+[node name="desk" parent="Decor" unique_id=944685986 instance=ExtResource("3_avusk")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.1589276, 0)
+
+[node name="chair" parent="." unique_id=1157871136 instance=ExtResource("4_7gc6s")]
+transform = Transform3D(0.1780123, 0, -0.9840283, 0, 1, 0, 0.9840283, 0, 0.1780123, -0.28083527, -0.062377404, -1.4174862)
