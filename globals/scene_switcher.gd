@@ -18,12 +18,12 @@ var current_level
 var player
 
 
-func switch_scene(scene: PackedScene, player_spawn_loc: Vector3):
+func switch_scene(scene: PackedScene, player_spawn_loc: Vector3, spawn_name: String):
 	FadeToBlack.get_node("AnimationPlayer").play("fade_in_out")
 	await get_tree().create_timer(0.5).timeout
-	deferred_switch_scene(scene, player_spawn_loc)
+	deferred_switch_scene(scene, player_spawn_loc, spawn_name)
 
-func deferred_switch_scene(scene: PackedScene, player_spawn_loc: Vector3): # remove old level if possible, add new level
+func deferred_switch_scene(scene: PackedScene, player_spawn_loc: Vector3, spawn_name: String): # remove old level if possible, add new level
 	var new_scene = scene.instantiate()
 	
 	if not game:
@@ -38,4 +38,10 @@ func deferred_switch_scene(scene: PackedScene, player_spawn_loc: Vector3): # rem
 	if not player:
 		player = game.find_child("Player")
 	if player:
-		player.position = player_spawn_loc
+		var spawn
+		if spawn_name:
+			spawn = new_scene.find_child(spawn_name)
+		if spawn:
+			player.position = spawn.position
+		else:
+			player.position = player_spawn_loc

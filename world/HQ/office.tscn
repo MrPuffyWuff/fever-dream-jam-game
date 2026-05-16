@@ -70,9 +70,10 @@ transform = Transform3D(0.1780123, 0, -0.9840283, 0, 1, 0, 0.9840283, 0, 0.17801
 
 [node name="Transitions" type="Node3D" parent="." unique_id=1039185245]
 
-[node name="SceneSwitchArea" parent="Transitions" unique_id=445465897 instance=ExtResource("5_dqkcp")]
+[node name="ToHallway" parent="Transitions" unique_id=445465897 instance=ExtResource("5_dqkcp")]
 to_scene = "res://world/HQ/hallway.tscn"
+spawn_name = "FromOffice"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Transitions/SceneSwitchArea" unique_id=573341877]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Transitions/ToHallway" unique_id=573341877]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.815866, 0, 2.4074638)
 shape = SubResource("BoxShape3D_wawyi")

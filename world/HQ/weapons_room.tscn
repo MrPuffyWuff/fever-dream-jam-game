@@ -62,6 +62,8 @@ shape = SubResource("ConcavePolygonShape3D_8fha0")
 
 [node name="SceneSwitchArea" parent="Transitions" unique_id=445465897 instance=ExtResource("3_327lh")]
 to_scene = "res://world/HQ/hallway_level.tscn"
+spawn_pos = null
+spawn_name = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Transitions/SceneSwitchArea" unique_id=2054997603]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.487649)
